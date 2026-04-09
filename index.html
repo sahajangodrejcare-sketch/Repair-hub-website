@@ -244,3 +244,75 @@ function sendWhatsApp() {
 }
 </script></body>
 </html>
+<!DOCTYPE html><html>
+<head>
+  <title>Repair Hub Appliance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>
+    body {font-family: Arial; margin:0; background:#f4f7fb;}
+    header {background:#0b63f6; color:white; padding:20px; text-align:center;}
+    .container {padding:20px;}
+    .card {background:white; padding:15px; margin:10px 0; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);} 
+    .btn {padding:12px; border:none; border-radius:8px; cursor:pointer; background:#0b63f6; color:white; width:100%; margin-top:10px;}
+    input, textarea, select {width:100%; padding:10px; margin:6px 0; border-radius:6px; border:1px solid #ccc;}
+    .stars span {font-size:24px; cursor:pointer; color:gray;}
+    .review {background:#fff; padding:10px; border-radius:10px; margin-top:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);} 
+  </style></head><body><header>
+  <h1>Repair Hub Appliance Services</h1>
+  <p>Customer Review & Booking</p>
+</header><div class="container"><!-- Review Form --><div class="card">
+  <h3>⭐ Give Your Review</h3>
+  <input id="rname" placeholder="Your Name">
+  <textarea id="rtext" placeholder="Write your review"></textarea>  <div class="stars" id="stars">
+    <span onclick="rate(1)">★</span>
+    <span onclick="rate(2)">★</span>
+    <span onclick="rate(3)">★</span>
+    <span onclick="rate(4)">★</span>
+    <span onclick="rate(5)">★</span>
+  </div><button class="btn" onclick="submitReview()">Submit Review</button>
+
+</div><!-- Review Display --><div class="card">
+  <h3>⭐ Customer Reviews</h3>
+  <div id="reviewList"></div>
+</div></div><script>
+var rating = 0;
+
+function rate(star) {
+  rating = star;
+  let stars = document.querySelectorAll('#stars span');
+  stars.forEach((s, i) => {
+    s.style.color = i < star ? 'gold' : 'gray';
+  });
+}
+
+// Load saved reviews
+window.onload = function() {
+  let saved = localStorage.getItem('reviews');
+  if(saved){
+    document.getElementById('reviewList').innerHTML = saved;
+  }
+}
+
+function submitReview() {
+  var name = document.getElementById('rname').value;
+  var text = document.getElementById('rtext').value;
+
+  if(!name || !text || rating==0){
+    alert("Fill all fields & give rating");
+    return;
+  }
+
+  var reviewHTML = `<div class='review'><b>${name}</b><br>${'⭐'.repeat(rating)}<br>${text}</div>`;
+
+  let reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML += reviewHTML;
+
+  // Save to localStorage
+  localStorage.setItem('reviews', reviewList.innerHTML);
+
+  // reset
+  document.getElementById('rname').value='';
+  document.getElementById('rtext').value='';
+  rate(0);
+}
+</script></body>
+</html>
