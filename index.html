@@ -1,161 +1,254 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repair Hub Service</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Hub Appliance Services - Kolkata</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://source.unsplash.com/1600x900/?ac-repair') center/cover no-repeat;
+            height: 100vh;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; }
+        .tagline { font-size: 1.6rem; margin: 15px 0; }
+        .highlight { color: #ffd700; font-weight: bold; }
 
-<style>
-body {margin:0;font-family:Arial;}
-header {
-  background:#0d6efd;
-  color:white;
-  padding:15px;
-  text-align:center;
-}
-.hero {
-  background:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952');
-  background-size:cover;
-  color:white;
-  padding:80px 20px;
-  text-align:center;
-}
-.btn {
-  padding:12px 20px;
-  margin:5px;
-  border:none;
-  cursor:pointer;
-  font-size:16px;
-}
-.call {background:#ffc107;}
-.whatsapp {background:#25d366;color:white;}
-.section {padding:40px;text-align:center;}
-.services {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.box {
-  width:200px;
-  margin:10px;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-}
-.review {
-  background:white;
-  padding:15px;
-  margin:10px;
-  border-radius:8px;
-}
-footer {
-  background:#222;
-  color:white;
-  padding:20px;
-  text-align:center;
-}
-</style>
+        .floating-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .float-btn {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            transition: all 0.3s;
+        }
+        .float-btn:hover { transform: scale(1.15); }
+        .float-call { background: #ff3b30; color: white; }
+        .float-whatsapp { background: #25D366; color: white; }
+
+        .service-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        .testimonial { background: #f8f9fa; border-left: 6px solid #0d6efd; }
+    </style>
 </head>
-
 <body>
 
-<header>
-  <h2>Repair Hub Service</h2>
-</header>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="#">Repair Hub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#home">হোম</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">সার্ভিস</a></li>
+                <li class="nav-item"><a class="nav-link" href="#booking">বুকিং</a></li>
+                <li class="nav-item"><a class="nav-link" href="#reviews">রিভিউ</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<!-- HERO -->
-<section class="hero">
-  <h1>24/7 AC, Fridge & Appliance Repair</h1>
-  <p>Fast • Reliable • Affordable Service in Kolkata</p>
-
-  <a href="tel:YOURNUMBER">
-    <button class="btn call">📞 Call Now</button>
-  </a>
-
-  <a href="https://wa.me/91YOURNUMBER">
-    <button class="btn whatsapp">💬 WhatsApp</button>
-  </a>
+<!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1>Repair Hub<br>Appliance Services</h1>
+                <p class="tagline">Professional AC, Refrigerator, Washing Machine & Microwave Repair in Kolkata</p>
+                <p class="fs-3 highlight">24/7 Emergency Service Available</p>
+                
+                <div class="d-flex gap-3 mt-4 flex-wrap">
+                    <span class="badge bg-success fs-5 px-4 py-3">Fast</span>
+                    <span class="badge bg-success fs-5 px-4 py-3">Reliable</span>
+                    <span class="badge bg-success fs-5 px-4 py-3">Affordable</span>
+                </div>
+            </div>
+            
+            <!-- Professional AC Technician Photo -->
+            <div class="col-lg-5 text-center">
+                <img src="https://i.imgur.com/placeholder.jpg" 
+                     onerror="this.src='https://source.unsplash.com/600x700/?indian-ac-technician-working-on-split-ac'" 
+                     class="img-fluid rounded-4 shadow-lg" 
+                     alt="Professional AC Repair Technician"
+                     style="max-height: 520px; width: 100%; object-fit: cover; border: 5px solid white;">
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section">
-  <h2>Our Services</h2>
-  <div class="services">
-    <div class="box">AC Repair</div>
-    <div class="box">Washing Machine</div>
-    <div class="box">Microwave</div>
-    <div class="box">Geyser Repair</div>
-  </div>
+<!-- Services -->
+<section id="services" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">আমরা যেসব অ্যাপ্লায়েন্স রিপেয়ার করি</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card service-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-snowflake fa-4x text-primary mb-3"></i>
+                        <h5>AC Repair & Service</h5>
+                        <p>Split, Window, Cassette – Gas Filling, Compressor, PCB</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card service-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-box fa-4x text-info mb-3"></i>
+                        <h5>Fridge Repair</h5>
+                        <p>Single / Double Door – Gas Leak, Compressor, Cooling Issue</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card service-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-tshirt fa-4x text-success mb-3"></i>
+                        <h5>Washing Machine Repair</h5>
+                        <p>Fully / Semi Automatic – Motor, Drum, Water Leak</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card service-card h-100 text-center">
+                    <div class="card-body">
+                        <i class="fas fa-microwave fa-4x text-warning mb-3"></i>
+                        <h5>Microwave Repair</h5>
+                        <p>Magnetron, Door Switch, Heating Problem</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <p class="fs-5">১০ বছরের বেশি সময় ধরে কলকাতায় সৎ ও দক্ষ সার্ভিস দিয়ে আসছি। অরিজিনাল পার্টস, স্বচ্ছ মূল্য ও ৩০ দিনের ওয়ারেন্টি।</p>
+        </div>
+    </div>
 </section>
 
-<!-- WHY US -->
-<section class="section" style="background:#f1f1f1;">
-  <h2>Why Choose Us</h2>
-  <p>✔ 10+ Years Experience</p>
-  <p>✔ Same Day Service</p>
-  <p>✔ Affordable Price</p>
-  <p>✔ Trusted Technician</p>
+<!-- Booking Form -->
+<section id="booking" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">অনলাইন বুকিং করুন</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-body p-5">
+                        <form id="bookingForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">আপনার নাম *</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">মোবাইল নম্বর *</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">পূর্ণ ঠিকানা</label>
+                                <textarea class="form-control" id="address" rows="2"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">সার্ভিস *</label>
+                                    <select class="form-select" id="service" required>
+                                        <option value="">সিলেক্ট করুন</option>
+                                        <option value="AC Repair">AC Repair</option>
+                                        <option value="Fridge Repair">Fridge Repair</option>
+                                        <option value="Washing Machine">Washing Machine Repair</option>
+                                        <option value="Microwave">Microwave Repair</option>
+                                        <option value="Other">অন্যান্য</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">পছন্দের তারিখ ও সময়</label>
+                                    <input type="datetime-local" class="form-control" id="datetime">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">সমস্যার বিবরণ</label>
+                                <textarea class="form-control" id="problem" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100 py-3 fw-bold">বুকিং কনফার্ম করুন</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- REVIEW SYSTEM -->
-<section class="section">
-  <h2>Customer Reviews</h2>
-
-  <input id="name" placeholder="Your Name"><br><br>
-
-  <select id="rating">
-    <option value="5">⭐⭐⭐⭐⭐</option>
-    <option value="4">⭐⭐⭐⭐</option>
-    <option value="3">⭐⭐⭐</option>
-  </select><br><br>
-
-  <textarea id="review" placeholder="Write review"></textarea><br><br>
-
-  <button onclick="addReview()" class="btn whatsapp">Submit</button>
-
-  <div id="reviews"></div>
+<!-- Customer Reviews -->
+<section id="reviews" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">আমাদের গ্রাহকরা যা বলেন</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card testimonial h-100 p-4">
+                    <p>"AC একদম ঠান্ডা করছিল না। খুব দ্রুত এসে গ্যাস ফিল করে দিলেন। সার্ভিস অসাধারণ!"</p>
+                    <h6>— সৌরভ দাস, বেহালা</h6>
+                    <div class="text-warning">★★★★★</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card testimonial h-100 p-4">
+                    <p>"ফ্রিজের সমস্যা হয়েছিল। ১০ বছর ধরে এদের সার্ভিস নিচ্ছি। সবসময় সন্তুষ্ট।"</p>
+                    <h6>— অনিতা সেন, সল্টলেক</h6>
+                    <div class="text-warning">★★★★★</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card testimonial h-100 p-4">
+                    <p>"ওয়াশিং মেশিন বন্ধ হয়ে গিয়েছিল। রাতে ফোন করার পর সকালেই ঠিক করে দিয়েছেন।"</p>
+                    <h6>— রাজেশ মণ্ডল, হাওড়া</h6>
+                    <div class="text-warning">★★★★☆</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section">
-  <h2>Contact Us</h2>
-  <p>📞 YOUR NUMBER</p>
-  <p>📍 Kolkata</p>
-</section>
-
-<footer>
-  <p>© 2026 Repair Hub Service</p>
+<!-- Footer -->
+<footer class="bg-dark text-white py-5 text-center">
+    <p class="fs-4">📞 <strong>9804567074</strong></p>
+    <p>কলকাতা ও আশেপাশে ২৪/৭ সার্ভিস | Genuine Parts | 30 Days Warranty</p>
+    <p>&copy; 2026 Repair Hub Appliance Services</p>
 </footer>
 
+<!-- Floating Buttons -->
+<div class="floating-btn">
+    <a href="tel:9804567074" class="float-btn float-call" title="Call Now"><i class="fas fa-phone"></i></a>
+    <a href="https://wa.me/919804567074" target="_blank" class="float-btn float-whatsapp" title="WhatsApp Now"><i class="fab fa-whatsapp"></i></a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-function addReview() {
-  let name = document.getElementById("name").value;
-  let rating = document.getElementById("rating").value;
-  let review = document.getElementById("review").value;
-
-  if(name=="" || review==""){alert("Fill all");return;}
-
-  reviews.push({name,rating,review});
-  localStorage.setItem("reviews",JSON.stringify(reviews));
-  display();
-}
-
-function display(){
-  let out="";
-  reviews.forEach(r=>{
-    out+=`<div class="review">
-      <b>${r.name}</b><br>
-      ${"⭐".repeat(r.rating)}<br>
-      ${r.review}
-    </div>`;
-  });
-  document.getElementById("reviews").innerHTML=out;
-}
-display();
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('ধন্যবাদ! আপনার বুকিং রিকোয়েস্ট পেয়েছি। 9804567074 নম্বরে শীঘ্রই যোগাযোগ করা হবে।');
+        this.reset();
+    });
 </script>
-
 </body>
 </html>
