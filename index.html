@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -16,7 +17,7 @@
             align-items: center;
         }
         .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; }
-        .tagline { font-size: 1.6rem; margin: 15px 0; }
+        .tagline { font-size: 1.55rem; margin: 15px 0; }
         .highlight { color: #ffd700; font-weight: bold; }
 
         .floating-btn {
@@ -88,8 +89,7 @@
             
             <!-- Professional AC Technician Photo -->
             <div class="col-lg-5 text-center">
-                <img src="https://i.imgur.com/placeholder.jpg" 
-                     onerror="this.src='https://source.unsplash.com/600x700/?indian-ac-technician-working-on-split-ac'" 
+                <img src="https://source.unsplash.com/600x700/?indian-ac-technician-working-on-split-ac" 
                      class="img-fluid rounded-4 shadow-lg" 
                      alt="Professional AC Repair Technician"
                      style="max-height: 520px; width: 100%; object-fit: cover; border: 5px solid white;">
@@ -108,7 +108,7 @@
                     <div class="card-body">
                         <i class="fas fa-snowflake fa-4x text-primary mb-3"></i>
                         <h5>AC Repair & Service</h5>
-                        <p>Split, Window, Cassette – Gas Filling, Compressor, PCB</p>
+                        <p>Split, Window, Cassette AC – Gas Filling, Compressor, PCB</p>
                     </div>
                 </div>
             </div>
@@ -140,13 +140,13 @@
                 </div>
             </div>
         </div>
-        <div class="text-center mt-5">
-            <p class="fs-5">১০ বছরের বেশি সময় ধরে কলকাতায় সৎ ও দক্ষ সার্ভিস দিয়ে আসছি। অরিজিনাল পার্টস, স্বচ্ছ মূল্য ও ৩০ দিনের ওয়ারেন্টি।</p>
+        <div class="text-center mt-5 fs-5">
+            <p>১০ বছরের বেশি সময় ধরে কলকাতায় বিশ্বস্ত সার্ভিস দিয়ে আসছি। অরিজিনাল পার্টস, স্বচ্ছ মূল্য ও ৩০ দিনের ওয়ারেন্টি।</p>
         </div>
     </div>
 </section>
 
-<!-- Booking Form -->
+<!-- Online Booking Form -->
 <section id="booking" class="py-5">
     <div class="container">
         <h2 class="text-center mb-5">অনলাইন বুকিং করুন</h2>
@@ -167,30 +167,30 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">পূর্ণ ঠিকানা</label>
-                                <textarea class="form-control" id="address" rows="2"></textarea>
+                                <textarea class="form-control" id="address" rows="2" placeholder="ফ্ল্যাট নং, রাস্তা, এলাকা, পিন কোড"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">সার্ভিস *</label>
-                                    <select class="form-select" id="service" required>
+                                    <label class="form-label">কোন মেশিন সারাতে হবে? *</label>
+                                    <select class="form-select" id="machine" required>
                                         <option value="">সিলেক্ট করুন</option>
-                                        <option value="AC Repair">AC Repair</option>
-                                        <option value="Fridge Repair">Fridge Repair</option>
-                                        <option value="Washing Machine">Washing Machine Repair</option>
-                                        <option value="Microwave">Microwave Repair</option>
+                                        <option value="AC">AC (স্প্লিট/উইন্ডো)</option>
+                                        <option value="Fridge">Fridge / ফ্রিজ</option>
+                                        <option value="Washing Machine">Washing Machine</option>
+                                        <option value="Microwave">Microwave Oven</option>
                                         <option value="Other">অন্যান্য</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">পছন্দের তারিখ ও সময়</label>
+                                    <label class="form-label">কবে ও কখন আসতে হবে?</label>
                                     <input type="datetime-local" class="form-control" id="datetime">
                                 </div>
                             </div>
                             <div class="mb-4">
-                                <label class="form-label">সমস্যার বিবরণ</label>
-                                <textarea class="form-control" id="problem" rows="4"></textarea>
+                                <label class="form-label">মেশিনে কী সমস্যা হয়েছে?</label>
+                                <textarea class="form-control" id="problem" rows="4" placeholder="যেমন: AC ঠান্ডা করছে না, ফ্রিজে আওয়াজ হচ্ছে, ওয়াশিং মেশিন পানি ফেলছে না..."></textarea>
                             </div>
-                            <button type="submit" class="btn btn-danger w-100 py-3 fw-bold">বুকিং কনফার্ম করুন</button>
+                            <button type="submit" class="btn btn-danger w-100 py-3 fw-bold">বুকিং সাবমিট করুন → WhatsApp-এ পাঠান</button>
                         </form>
                     </div>
                 </div>
@@ -246,8 +246,32 @@
 <script>
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        alert('ধন্যবাদ! আপনার বুকিং রিকোয়েস্ট পেয়েছি। 9804567074 নম্বরে শীঘ্রই যোগাযোগ করা হবে।');
+
+        const name = document.getElementById('name').value.trim() || 'নাম দেয়া হয়নি';
+        const phone = document.getElementById('phone').value.trim() || 'ফোন নম্বর দেয়া হয়নি';
+        const address = document.getElementById('address').value.trim() || 'ঠিকানা দেয়া হয়নি';
+        const machine = document.getElementById('machine').value || 'মেশিন সিলেক্ট করা হয়নি';
+        const datetime = document.getElementById('datetime').value || 'তারিখ ও সময় দেয়া হয়নি';
+        const problem = document.getElementById('problem').value.trim() || 'সমস্যার বিবরণ দেয়া হয়নি';
+
+        const message = `*🛠️ নতুন বুকিং রিকোয়েস্ট*\n\n` +
+                        `*নাম:* ${name}\n` +
+                        `*ফোন:* ${phone}\n` +
+                        `*ঠিকানা:* ${address}\n` +
+                        `*মেশিন:* ${machine}\n` +
+                        `*তারিখ ও সময়:* ${datetime}\n` +
+                        `*সমস্যা:* ${problem}\n\n` +
+                        `যত তাড়াতাড়ি সম্ভব যোগাযোগ করুন। ধন্যবাদ!`;
+
+        const whatsappNumber = "919804567074";   // আপনার নম্বর
+
+        const url = `https://wa.me/\( {whatsappNumber}?text= \){encodeURIComponent(message)}`;
+
+        window.open(url, '_blank');
+
         this.reset();
+
+        alert('ধন্যবাদ! আপনার বুকিং ডিটেইলস WhatsApp-এ খুলে গেছে। Send বাটনে ক্লিক করে পাঠিয়ে দিন।');
     });
 </script>
 </body>
