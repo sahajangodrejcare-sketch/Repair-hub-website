@@ -64,7 +64,6 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#home">হোম</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">সার্ভিস</a></li>
-                <li class="nav-item"><a class="nav-link" href="#booking">বুকিং</a></li>
                 <li class="nav-item"><a class="nav-link" href="#reviews">রিভিউ</a></li>
             </ul>
         </div>
@@ -146,59 +145,6 @@
     </div>
 </section>
 
-<!-- Online Booking Form -->
-<section id="booking" class="py-5">
-    <div class="container">
-        <h2 class="text-center mb-5">অনলাইন বুকিং করুন</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow">
-                    <div class="card-body p-5">
-                        <form id="bookingForm">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">আপনার নাম *</label>
-                                    <input type="text" class="form-control" id="name" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">মোবাইল নম্বর *</label>
-                                    <input type="tel" class="form-control" id="phone" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">পূর্ণ ঠিকানা</label>
-                                <textarea class="form-control" id="address" rows="2" placeholder="ফ্ল্যাট নং, রাস্তা, এলাকা, পিন কোড"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">কোন মেশিন সারাতে হবে? *</label>
-                                    <select class="form-select" id="machine" required>
-                                        <option value="">সিলেক্ট করুন</option>
-                                        <option value="AC">AC (স্প্লিট/উইন্ডো)</option>
-                                        <option value="Fridge">Fridge / ফ্রিজ</option>
-                                        <option value="Washing Machine">Washing Machine</option>
-                                        <option value="Microwave">Microwave Oven</option>
-                                        <option value="Other">অন্যান্য</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">কবে ও কখন আসতে হবে?</label>
-                                    <input type="datetime-local" class="form-control" id="datetime">
-                                </div>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label">মেশিনে কী সমস্যা হয়েছে?</label>
-                                <textarea class="form-control" id="problem" rows="4" placeholder="যেমন: AC ঠান্ডা করছে না, ফ্রিজে আওয়াজ হচ্ছে, ওয়াশিং মেশিন পানি ফেলছে না..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-danger w-100 py-3 fw-bold">বুকিং সাবমিট করুন → WhatsApp-এ পাঠান</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Customer Reviews -->
 <section id="reviews" class="py-5 bg-light">
     <div class="container">
@@ -243,36 +189,58 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const name = document.getElementById('name').value.trim() || 'নাম দেয়া হয়নি';
-        const phone = document.getElementById('phone').value.trim() || 'ফোন নম্বর দেয়া হয়নি';
-        const address = document.getElementById('address').value.trim() || 'ঠিকানা দেয়া হয়নি';
-        const machine = document.getElementById('machine').value || 'মেশিন সিলেক্ট করা হয়নি';
-        const datetime = document.getElementById('datetime').value || 'তারিখ ও সময় দেয়া হয়নি';
-        const problem = document.getElementById('problem').value.trim() || 'সমস্যার বিবরণ দেয়া হয়নি';
-
-        const message = `*🛠️ নতুন বুকিং রিকোয়েস্ট*\n\n` +
-                        `*নাম:* ${name}\n` +
-                        `*ফোন:* ${phone}\n` +
-                        `*ঠিকানা:* ${address}\n` +
-                        `*মেশিন:* ${machine}\n` +
-                        `*তারিখ ও সময়:* ${datetime}\n` +
-                        `*সমস্যা:* ${problem}\n\n` +
-                        `যত তাড়াতাড়ি সম্ভব যোগাযোগ করুন। ধন্যবাদ!`;
-
-        const whatsappNumber = "919804567074";   // আপনার নম্বর
-
-        const url = `https://wa.me/\( {whatsappNumber}?text= \){encodeURIComponent(message)}`;
-
-        window.open(url, '_blank');
-
-        this.reset();
-
-        alert('ধন্যবাদ! আপনার বুকিং ডিটেইলস WhatsApp-এ খুলে গেছে। Send বাটনে ক্লিক করে পাঠিয়ে দিন।');
-    });
-</script>
 </body>
+</html>
+<!DOCTYPE html><html>
+<head>
+  <title>Repair Hub Appliance Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>
+    body {font-family: Arial; margin:0; background:#f4f7fb;}
+    header {background:#0b63f6; color:white; padding:20px; text-align:center;}
+    .container {padding:20px;}
+    .card {background:white; padding:15px; margin:10px 0; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);} 
+    .btn {padding:12px 20px; border:none; border-radius:8px; cursor:pointer; margin-top:10px; background:#0b63f6; color:white; width:100%;}
+    input, textarea, select {width:100%; padding:10px; margin:6px 0; border-radius:6px; border:1px solid #ccc;}
+  </style></head><body><header>
+  <h1>Repair Hub Appliance Services</h1>
+  <p>AC & Fridge Repair Booking</p>
+</header><div class="container"><div class="card">
+  <h3>📝 Book Service Online</h3>  <input id="name" placeholder="Your Name">
+  <input id="phone" placeholder="Mobile Number">  <select id="machine">
+    <option value="">Select Machine</option>
+    <option>AC</option>
+    <option>Fridge</option>
+    <option>Washing Machine</option>
+  </select>  <textarea id="problem" placeholder="What problem are you facing?"></textarea>  <input id="date" type="date">
+  <input id="time" type="time">  <textarea id="address" placeholder="Your Address"></textarea><button class="btn" onclick="sendWhatsApp()">Submit Booking</button>
+
+</div></div><script>
+function sendWhatsApp() {
+  var name = document.getElementById('name').value;
+  var phone = document.getElementById('phone').value;
+  var machine = document.getElementById('machine').value;
+  var problem = document.getElementById('problem').value;
+  var date = document.getElementById('date').value;
+  var time = document.getElementById('time').value;
+  var address = document.getElementById('address').value;
+
+  if(!name || !phone || !machine || !problem){
+    alert("Please fill all required fields");
+    return;
+  }
+
+  var message = "*New Booking Request*%0A"
+    + "Name: " + name + "%0A"
+    + "Phone: " + phone + "%0A"
+    + "Machine: " + machine + "%0A"
+    + "Problem: " + problem + "%0A"
+    + "Date: " + date + "%0A"
+    + "Time: " + time + "%0A"
+    + "Address: " + address;
+
+  var url = "https://wa.me/919804567074?text=" + message;
+
+  window.open(url, '_blank');
+}
+</script></body>
 </html>
