@@ -316,210 +316,168 @@ function submitReview() {
 }
 </script></body>
 </html>
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <title>Repair Hub Invoice</title>
+
   <style>
-    body {font-family: Arial; padding:20px;}
-    input, select {padding:8px; margin:5px; width:260px;}
-    table {width:100%; border-collapse: collapse; margin-top:10px;}
-    table, th, td {border:1px solid black;}
-    th, td {padding:8px; text-align:center;}
-    #invoice {display:none; border:2px solid #000; padding:15px; margin-top:20px;}
+    body {font-family: Arial; background:#f5f5f5; padding:20px;}
+    .container {max-width:700px; margin:auto; background:#fff; padding:20px; border-radius:10px;}
+    h1 {text-align:center;}
+    .header {text-align:center; border-bottom:2px solid #ccc; padding-bottom:10px;}
+    .header h2 {margin:0;}
+    input, select {padding:8px; margin:5px; width:100%;}
+    table {width:100%; border-collapse: collapse; margin-top:15px;}
+    table, th, td {border:1px solid #ddd;}
+    th, td {padding:10px; text-align:center;}
+    .total {text-align:right; font-size:18px; font-weight:bold;}
     button {padding:10px; margin:5px;}
-    h2 {text-align:center;}
   </style>
+
 </head>
+
 <body>
 
-<h2><b>REPAIR HUB APPLIANCE SERVICES</b></h2>
-<p style="text-align:center;"><b>📞 9804567074</b></p>
+<div class="container">
 
-<h3>Create Invoice</h3>
+  <div class="header">
+    <h2><b>REPAIR HUB APPLIANCE SERVICES</b></h2>
+    <p>📞 9804567074</p>
+  </div>
 
-<input type="text" id="name" placeholder="Customer Name"><br>
-<input type="text" id="phone" placeholder="Mobile Number"><br>
-<input type="text" id="address" placeholder="Address"><br>
+  <h3>Invoice</h3>
 
-<select id="service">
-  <option>AC Repair</option>
-  <option>Fridge Repair</option>
-  <option>Washing Machine</option>
-  <option>Microwave</option>
-</select><br>
+  <input type="text" id="name" placeholder="Customer Name">
+  <input type="text" id="phone" placeholder="Customer Phone">
+  <input type="text" id="address" placeholder="Customer Address">
 
-<input type="text" id="customService" placeholder="Or type service"><br>
+  <select id="service">
+    <option>AC Repair</option>
+    <option>Fridge Repair</option>
+    <option>Washing Machine</option>
+  </select>
 
-<h4>Parts Details</h4>
+  <input type="text" id="customService" placeholder="Or type custom service">
 
-<table id="partsTable">
-  <tr>
-    <th>Part Name</th>
-    <th>Price ₹</th>
-  </tr>
-</table>
+  <table id="items">
+    <tr>
+      <th>Description</th>
+      <th>Amount ₹</th>
+    </tr>
+  </table>
 
-<button onclick="addPart()">+ Add Part</button><br>
+  <button onclick="addItem()">+ Add Part / Service</button>
 
-<input type="number" id="serviceCharge" placeholder="Service Charge ₹"><br>
+  <input type="number" id="serviceCharge" placeholder="Service Charge ₹">
 
-<button onclick="generateBill()">Generate Invoice</button>
+  <h3 class="total" id="total">Total: ₹0</h3>
 
-<!-- Invoice -->
-<div id="invoice">
-  <h2><b>REPAIR HUB APPLIANCE SERVICES</b></h2>
-  <p><b>📞 9804567074</b></p>
-  <hr>
+  <p>Date: <span id="date"></span></p>
 
-  <p id="date"></p>
-  <p id="invNo"></p>
+  <button onclick="generate()">Generate Bill</button>
+  <button onclick="printBill()">🖨️ Print</button>
+  <button onclick="downloadPDF()">📄 PDF</button>
+  <button onclick="sendWhatsApp()">📲 WhatsApp</button>
+  <button onclick="viewSaved()">📂 Saved Bills</button>
 
-  <p id="custName"></p>
-  <p id="custPhone"></p>
-  <p id="custAddress"></p>
-  <p id="custService"></p>
+  <div id="saved"></div>
 
-  <h4>Parts Used</h4>
-  <table id="billParts"></table>
-
-  <p id="serviceAmt"></p>
-  <h3 id="total"></h3>
-
-  <p style="color:green;"><b>Payment: CASH</b></p>
 </div>
-
-<br>
-
-<button onclick="printBill()">🖨️ Print</button>
-<button onclick="downloadPDF()">📄 PDF</button>
-<button onclick="sendWhatsApp()">📲 WhatsApp</button>
-<button onclick="viewSaved()">📂 View Saved Bills</button>
-
-<div id="savedBills"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
-let billData = {};
 
-function addPart(){
-  let table = document.getElementById("partsTable");
-  let row = table.insertRow();
+let bill = {};
 
+function addItem(){
+  let row = document.getElementById("items").insertRow();
   row.innerHTML = `
-    <td><input type="text" placeholder="Part Name"></td>
-    <td><input type="number" placeholder="Price"></td>
+    <td><input type="text" placeholder="Part / Work"></td>
+    <td><input type="number" placeholder="Amount"></td>
   `;
 }
 
-function generateBill(){
+function generate(){
 
   let name = document.getElementById("name").value;
   let phone = document.getElementById("phone").value;
   let address = document.getElementById("address").value;
 
-  let serviceDropdown = document.getElementById("service").value;
-  let customService = document.getElementById("customService").value;
-  let service = customService ? customService : serviceDropdown;
+  let service = document.getElementById("customService").value || document.getElementById("service").value;
 
-  let date = new Date().toLocaleDateString();
-  let invoice = "RS" + Math.floor(Math.random()*100000);
-
-  let partTable = document.getElementById("partsTable").rows;
+  let rows = document.getElementById("items").rows;
   let total = 0;
-  let partsHTML = "<tr><th>Part</th><th>Price</th></tr>";
 
-  for(let i=1;i<partTable.length;i++){
-    let partName = partTable[i].cells[0].children[0].value;
-    let partPrice = parseFloat(partTable[i].cells[1].children[0].value) || 0;
-
-    if(partName){
-      partsHTML += `<tr><td>${partName}</td><td>₹${partPrice}</td></tr>`;
-      total += partPrice;
-    }
+  for(let i=1;i<rows.length;i++){
+    let val = parseFloat(rows[i].cells[1].children[0].value) || 0;
+    total += val;
   }
 
   let serviceCharge = parseFloat(document.getElementById("serviceCharge").value) || 0;
   total += serviceCharge;
 
-  document.getElementById("invoice").style.display = "block";
-
-  document.getElementById("date").innerHTML = "<b>Date:</b> " + date;
-  document.getElementById("invNo").innerHTML = "<b>Invoice:</b> " + invoice;
-
-  document.getElementById("custName").innerHTML = "<b>Name:</b> " + name;
-  document.getElementById("custPhone").innerHTML = "<b>Phone:</b> " + phone;
-  document.getElementById("custAddress").innerHTML = "<b>Address:</b> " + address;
-  document.getElementById("custService").innerHTML = "<b>Service:</b> " + service;
-
-  document.getElementById("billParts").innerHTML = partsHTML;
-
-  document.getElementById("serviceAmt").innerHTML = "<b>Service Charge:</b> ₹" + serviceCharge;
   document.getElementById("total").innerHTML = "Total: ₹" + total;
 
-  billData = {name, phone, address, service, total, date, invoice};
+  let date = new Date().toLocaleDateString();
+  document.getElementById("date").innerHTML = date;
 
-  // SAVE TO LOCAL STORAGE
-  let allBills = JSON.parse(localStorage.getItem("bills")) || [];
-  allBills.push(billData);
-  localStorage.setItem("bills", JSON.stringify(allBills));
+  bill = {name, phone, address, service, total, date};
+
+  // SAVE
+  let data = JSON.parse(localStorage.getItem("bills")) || [];
+  data.push(bill);
+  localStorage.setItem("bills", JSON.stringify(data));
 }
 
 function viewSaved(){
   let data = JSON.parse(localStorage.getItem("bills")) || [];
   let html = "<h3>Saved Bills</h3>";
-
-  data.forEach(b => {
-    html += `<p>${b.invoice} - ${b.name} - ₹${b.total}</p>`;
+  data.forEach(b=>{
+    html += `<p>${b.name} - ₹${b.total} (${b.date})</p>`;
   });
-
-  document.getElementById("savedBills").innerHTML = html;
+  document.getElementById("saved").innerHTML = html;
 }
 
 function printBill(){
-  let content = document.getElementById("invoice").innerHTML;
-  let win = window.open();
-  win.document.write(content);
-  win.print();
+  window.print();
 }
 
 async function downloadPDF(){
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF();
 
-  doc.text("REPAIR HUB APPLIANCE SERVICES", 20, 20);
-  doc.text("Phone: 9804567074", 20, 30);
+  doc.text("REPAIR HUB APPLIANCE SERVICES", 20,20);
+  doc.text("Phone: 9804567074", 20,30);
 
-  doc.text("Name: " + billData.name, 20, 50);
-  doc.text("Phone: " + billData.phone, 20, 60);
-  doc.text("Address: " + billData.address, 20, 70);
-  doc.text("Service: " + billData.service, 20, 80);
-  doc.text("Total: ₹" + billData.total, 20, 90);
-  doc.text("Date: " + billData.date, 20, 100);
-  doc.text("Invoice: " + billData.invoice, 20, 110);
+  doc.text("Name: "+bill.name, 20,50);
+  doc.text("Phone: "+bill.phone, 20,60);
+  doc.text("Address: "+bill.address, 20,70);
+  doc.text("Service: "+bill.service, 20,80);
+  doc.text("Total: ₹"+bill.total, 20,90);
+  doc.text("Date: "+bill.date, 20,100);
 
   doc.save("Invoice.pdf");
 }
 
 function sendWhatsApp(){
-  let number = billData.phone.replace(/\D/g,'');
-  if(number.length == 10){ number = "91" + number; }
+  let number = bill.phone.replace(/\D/g,'');
+  if(number.length==10){ number="91"+number; }
 
   let msg = `REPAIR HUB APPLIANCE SERVICES
 📞 9804567074
 
-Invoice: ${billData.invoice}
-Date: ${billData.date}
-
-Name: ${billData.name}
-Service: ${billData.service}
-Total: ₹${billData.total}
+Name: ${bill.name}
+Service: ${bill.service}
+Total: ₹${bill.total}
+Date: ${bill.date}
 
 Payment: CASH`;
 
-  window.open("https://wa.me/" + number + "?text=" + encodeURIComponent(msg));
+  window.open("https://wa.me/"+number+"?text="+encodeURIComponent(msg));
 }
+
 </script>
 
 </body>
