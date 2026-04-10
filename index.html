@@ -316,3 +316,211 @@ function submitReview() {
 }
 </script></body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Repair Hub Invoice</title>
+  <style>
+    body {font-family: Arial; padding:20px;}
+    input, select {padding:8px; margin:5px; width:260px;}
+    table {width:100%; border-collapse: collapse; margin-top:10px;}
+    table, th, td {border:1px solid black;}
+    th, td {padding:8px; text-align:center;}
+    #invoice {display:none; border:2px solid #000; padding:15px; margin-top:20px;}
+    button {padding:10px; margin:5px;}
+    h2 {text-align:center;}
+  </style>
+</head>
+<body>
+
+<h2><b>REPAIR HUB APPLIANCE SERVICES</b></h2>
+<p style="text-align:center;"><b>📞 9804567074</b></p>
+
+<h3>Create Invoice</h3>
+
+<input type="text" id="name" placeholder="Customer Name"><br>
+<input type="text" id="phone" placeholder="Mobile Number"><br>
+<input type="text" id="address" placeholder="Address"><br>
+
+<select id="service">
+  <option>AC Repair</option>
+  <option>Fridge Repair</option>
+  <option>Washing Machine</option>
+  <option>Microwave</option>
+</select><br>
+
+<input type="text" id="customService" placeholder="Or type service"><br>
+
+<h4>Parts Details</h4>
+
+<table id="partsTable">
+  <tr>
+    <th>Part Name</th>
+    <th>Price ₹</th>
+  </tr>
+</table>
+
+<button onclick="addPart()">+ Add Part</button><br>
+
+<input type="number" id="serviceCharge" placeholder="Service Charge ₹"><br>
+
+<button onclick="generateBill()">Generate Invoice</button>
+
+<!-- Invoice -->
+<div id="invoice">
+  <h2><b>REPAIR HUB APPLIANCE SERVICES</b></h2>
+  <p><b>📞 9804567074</b></p>
+  <hr>
+
+  <p id="date"></p>
+  <p id="invNo"></p>
+
+  <p id="custName"></p>
+  <p id="custPhone"></p>
+  <p id="custAddress"></p>
+  <p id="custService"></p>
+
+  <h4>Parts Used</h4>
+  <table id="billParts"></table>
+
+  <p id="serviceAmt"></p>
+  <h3 id="total"></h3>
+
+  <p style="color:green;"><b>Payment: CASH</b></p>
+</div>
+
+<br>
+
+<button onclick="printBill()">🖨️ Print</button>
+<button onclick="downloadPDF()">📄 PDF</button>
+<button onclick="sendWhatsApp()">📲 WhatsApp</button>
+<button onclick="viewSaved()">📂 View Saved Bills</button>
+
+<div id="savedBills"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+let billData = {};
+
+function addPart(){
+  let table = document.getElementById("partsTable");
+  let row = table.insertRow();
+
+  row.innerHTML = `
+    <td><input type="text" placeholder="Part Name"></td>
+    <td><input type="number" placeholder="Price"></td>
+  `;
+}
+
+function generateBill(){
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let address = document.getElementById("address").value;
+
+  let serviceDropdown = document.getElementById("service").value;
+  let customService = document.getElementById("customService").value;
+  let service = customService ? customService : serviceDropdown;
+
+  let date = new Date().toLocaleDateString();
+  let invoice = "RS" + Math.floor(Math.random()*100000);
+
+  let partTable = document.getElementById("partsTable").rows;
+  let total = 0;
+  let partsHTML = "<tr><th>Part</th><th>Price</th></tr>";
+
+  for(let i=1;i<partTable.length;i++){
+    let partName = partTable[i].cells[0].children[0].value;
+    let partPrice = parseFloat(partTable[i].cells[1].children[0].value) || 0;
+
+    if(partName){
+      partsHTML += `<tr><td>${partName}</td><td>₹${partPrice}</td></tr>`;
+      total += partPrice;
+    }
+  }
+
+  let serviceCharge = parseFloat(document.getElementById("serviceCharge").value) || 0;
+  total += serviceCharge;
+
+  document.getElementById("invoice").style.display = "block";
+
+  document.getElementById("date").innerHTML = "<b>Date:</b> " + date;
+  document.getElementById("invNo").innerHTML = "<b>Invoice:</b> " + invoice;
+
+  document.getElementById("custName").innerHTML = "<b>Name:</b> " + name;
+  document.getElementById("custPhone").innerHTML = "<b>Phone:</b> " + phone;
+  document.getElementById("custAddress").innerHTML = "<b>Address:</b> " + address;
+  document.getElementById("custService").innerHTML = "<b>Service:</b> " + service;
+
+  document.getElementById("billParts").innerHTML = partsHTML;
+
+  document.getElementById("serviceAmt").innerHTML = "<b>Service Charge:</b> ₹" + serviceCharge;
+  document.getElementById("total").innerHTML = "Total: ₹" + total;
+
+  billData = {name, phone, address, service, total, date, invoice};
+
+  // SAVE TO LOCAL STORAGE
+  let allBills = JSON.parse(localStorage.getItem("bills")) || [];
+  allBills.push(billData);
+  localStorage.setItem("bills", JSON.stringify(allBills));
+}
+
+function viewSaved(){
+  let data = JSON.parse(localStorage.getItem("bills")) || [];
+  let html = "<h3>Saved Bills</h3>";
+
+  data.forEach(b => {
+    html += `<p>${b.invoice} - ${b.name} - ₹${b.total}</p>`;
+  });
+
+  document.getElementById("savedBills").innerHTML = html;
+}
+
+function printBill(){
+  let content = document.getElementById("invoice").innerHTML;
+  let win = window.open();
+  win.document.write(content);
+  win.print();
+}
+
+async function downloadPDF(){
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.text("REPAIR HUB APPLIANCE SERVICES", 20, 20);
+  doc.text("Phone: 9804567074", 20, 30);
+
+  doc.text("Name: " + billData.name, 20, 50);
+  doc.text("Phone: " + billData.phone, 20, 60);
+  doc.text("Address: " + billData.address, 20, 70);
+  doc.text("Service: " + billData.service, 20, 80);
+  doc.text("Total: ₹" + billData.total, 20, 90);
+  doc.text("Date: " + billData.date, 20, 100);
+  doc.text("Invoice: " + billData.invoice, 20, 110);
+
+  doc.save("Invoice.pdf");
+}
+
+function sendWhatsApp(){
+  let number = billData.phone.replace(/\D/g,'');
+  if(number.length == 10){ number = "91" + number; }
+
+  let msg = `REPAIR HUB APPLIANCE SERVICES
+📞 9804567074
+
+Invoice: ${billData.invoice}
+Date: ${billData.date}
+
+Name: ${billData.name}
+Service: ${billData.service}
+Total: ₹${billData.total}
+
+Payment: CASH`;
+
+  window.open("https://wa.me/" + number + "?text=" + encodeURIComponent(msg));
+}
+</script>
+
+</body>
+</html>
