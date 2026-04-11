@@ -1,212 +1,445 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn" style="scroll-behavior: smooth;">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Repair Hub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repair Hub - কলকাতায় দ্রুত অ্যাপ্লায়েন্স রিপেয়ার</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        
+        .navbar {
+            background: #222;
+            color: white;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f6f9;
-}
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://source.unsplash.com/1600x900/?ac-technician,repair') center/cover no-repeat;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        .hero-content {
+            z-index: 2;
+        }
+        .company-name {
+            font-size: 4.8rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.7);
+        }
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        .btn {
+            padding: 14px 32px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            margin: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-call { background: #ff3b30; color: white; }
+        .btn-whatsapp { background: #25D366; color: white; }
 
-/* HEADER */
-.header {
-  background: linear-gradient(135deg,#5f2eea,#7b61ff);
-  color: white;
-  padding: 20px;
-}
+        .section { padding: 60px 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h2 { text-align: center; margin-bottom: 40px; font-size: 2.2rem; color: #222; }
 
-.header h2 {
-  margin: 0;
-}
+        .services-grid, .areas-grid, .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .service-card, .area-card, .review-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: 0.4s;
+        }
+        .service-card:hover, .area-card:hover, .review-card:hover {
+            transform: translateY(-12px);
+        }
+        .emoji { font-size: 3.5rem; margin-bottom: 15px; }
 
-.top-info {
-  font-size: 14px;
-  margin-top: 5px;
-}
+        .trust-stats {
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 30px 0;
+            color: #222;
+        }
 
-/* SEARCH */
-.search-box input {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 10px;
-}
+        .offer {
+            background: red;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 20px auto;
+            max-width: 800px;
+            border-radius: 8px;
+        }
 
-/* BANNER */
-.banner {
-  margin: 15px;
-  padding: 20px;
-  border-radius: 15px;
-  color: white;
-  background: linear-gradient(135deg,#ff7a18,#ffb347);
-}
+        .ai-note {
+            color: #ffd700;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.3rem;
+            margin: 25px 0;
+        }
 
-/* SERVICES */
-.section {
-  padding: 15px;
-}
+        .google-review-link {
+            display: block;
+            text-align: center;
+            background: #4285F4;
+            color: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin: 30px auto;
+            max-width: 420px;
+            font-size: 1.35rem;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 15px;
-}
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .pricing-table th, .pricing-table td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .pricing-table th { background: #007bff; color: white; }
 
-.card {
-  background: white;
-  padding: 15px;
-  border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 18px;
+            background: #f1f1f1;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .faq-answer {
+            padding: 18px;
+            display: none;
+            background: white;
+        }
 
-.card img {
-  width: 60px;
-}
+        .fixed-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 -3px 15px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            z-index: 999;
+        }
+        .bottom-nav a { font-size: 1.4rem; text-decoration: none; color: #333; }
 
-/* MODAL */
-.modal {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  padding: 20px;
-  border-radius: 20px 20px 0 0;
-}
-
-/* BUTTON */
-button {
-  width: 100%;
-  padding: 12px;
-  background: #5f2eea;
-  color: white;
-  border: none;
-  border-radius: 10px;
-}
-
-/* FLOAT */
-.call {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: red;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-}
-
-.whatsapp {
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  background: green;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-}
-
-/* NAV */
-.nav {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-}
-</style>
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="header">
-  <h2>Repair Hub Appliance Services</h2>
-  <div class="top-info">📞 9804567074 | Kolkata</div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div><strong>Repair Hub appliances service</strong></div>
+        <div class="nav-links">
+            <a href="#services">সার্ভিস</a>
+            <a href="#areas">এলাকা</a>
+            <a href="#booking">বুক করুন</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
 
-  <div class="search-box">
-    <input type="text" placeholder="Search AC, Fridge...">
-  </div>
-</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="company-name">REPAIR HUB APPLIANCES SERVICE</div>
+            <h1>কলকাতায় দ্রুত অ্যাপ্লায়েন্স রিপেয়ার</h1>
+            <p>AC • Fridge • Washing Machine • Microwave • Geyser<br>
+            <strong>৩০ মিনিটের মধ্যে রেসপন্স • বিশ্বস্ত টেকনিশিয়ান • ডোরস্টেপ সার্ভিস</strong></p>
+            
+            <a href="tel:9804567074" class="btn btn-call"><i class="fas fa-phone"></i> এখনই কল করুন</a>
+            <a href="https://wa.me/919804567074" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp করুন</a>
+        </div>
+    </section>
 
-<div class="banner">
-  ⚡ Service in 30 Minutes | Trusted Technician
-</div>
-
-<div class="section">
-  <h3>Services</h3>
-
-  <div class="grid">
-
-    <div class="card" onclick="openForm('AC Repair')">
-      <img src="https://cdn-icons-png.flaticon.com/512/1048/1048314.png">
-      <p>AC Repair</p>
+    <!-- Trust Stats -->
+    <div class="trust-stats">
+        ✔ 500+ Happy Customers | ✔ 10+ Years Experience | ✔ 4.8★ Rating
     </div>
 
-    <div class="card" onclick="openForm('Fridge Repair')">
-      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png">
-      <p>Fridge</p>
+    <!-- Limited Offer -->
+    <div class="offer">
+        🔥 Limited Offer: Same Day Service Available
     </div>
 
-    <div class="card" onclick="openForm('Washing Machine')">
-      <img src="https://cdn-icons-png.flaticon.com/512/1685/1685173.png">
-      <p>Washing Machine</p>
+    <!-- AI Note -->
+    <p class="ai-note">
+        🤖 Call করলেই AI assistant আপনার problem শুনে নিবে!
+    </p>
+
+    <!-- Services -->
+    <section id="services" class="section" style="background: white;">
+        <div class="container">
+            <h2>আমাদের সার্ভিসসমূহ</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="emoji">❄️</div>
+                    <h3>AC Repair</h3>
+                    <p>গ্যাস লিক, কুলিং, ইনস্টলেশন</p>
+                </div>
+                <div class="service-card">
+                    <div class="emoji">🧊</div>
+                    <h3>Fridge Repair</h3>
+                    <p>কুলিং সমস্যা, গ্যাস লিক, নয়েজ</p>
+                </div>
+                <div class="service-card">
+                    <div class="emoji">🧺</div>
+                    <h3>Washing Machine</h3>
+                    <p>স্পিন, ড্রেন, মোটর সমস্যা</p>
+                </div>
+                <div class="service-card">
+                    <div class="emoji">🍲</div>
+                    <h3>Microwave Repair</h3>
+                    <p>হিটিং, টার্নটেবল সমস্যা</p>
+                </div>
+                <div class="service-card">
+                    <div class="emoji">🚿</div>
+                    <h3>Geyser Repair</h3>
+                    <p>হিটিং, লিকেজ, থার্মোস্ট্যাট</p>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 60px;">আনুমানিক চার্জ (সার্ভিস ফি)</h2>
+            <table class="pricing-table">
+                <tr><th>সার্ভিস</th><th>সার্ভিস চার্জ</th><th>পার্টস আলাদা</th></tr>
+                <tr><td>AC Repair</td><td>₹249 - ₹799</td><td>হ্যাঁ</td></tr>
+                <tr><td>Fridge Repair</td><td>₹249 - ₹699</td><td>হ্যাঁ</td></tr>
+                <tr><td>Washing Machine</td><td>₹249 - ₹749</td><td>হ্যাঁ</td></tr>
+                <tr><td>Microwave</td><td>₹249 - ₹599</td><td>হ্যাঁ</td></tr>
+                <tr><td>Geyser</td><td>₹249 - ₹649</td><td>হ্যাঁ</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- Areas We Serve -->
+    <section id="areas" class="section" style="background: #f0f8ff;">
+        <div class="container">
+            <h2>যেসব এলাকায় সার্ভিস দিই</h2>
+            <div class="areas-grid">
+                <div class="area-card">Barasat</div>
+                <div class="area-card">Madhyamgram</div>
+                <div class="area-card">New Barrackpore</div>
+                <div class="area-card">Sodpur (Sodepur)</div>
+                <div class="area-card">Chinar Park</div>
+                <div class="area-card">Newtown</div>
+                <div class="area-card">Salt Lake</div>
+                <div class="area-card">kestopur</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Map -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <h2>আমাদের সার্ভিস এরিয়া</h2>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d235.5!2d88.42!3d22.62!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275a5b5b5b5b5%3A0x1234567890abcdef!2sNew%20Town%2C%20Kolkata%2C%20West%20Bengal!5e0!3m2!1sen!2sin!4v1710000000000" 
+            width="100%" height="350" style="border:0; border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p style="text-align:center; margin-top:15px; font-size:1.1rem;">
+                আমরা সার্ভিস দিই: Barasat, Madhyamgram, New Barrackpore, Sodpur, Chinar Park, Newtown এবং আশেপাশের এলাকায়
+            </p>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section">
+        <div class="container">
+            <h2>কেন Repair Hub বেছে নেবেন?</h2>
+            <ul style="max-width: 800px; margin: 0 auto; font-size: 1.25rem; line-height: 2.2;">
+                <li>✅ ৩০ মিনিটের মধ্যে রেসপন্স</li>
+                <li>✅ অভিজ্ঞ ও প্রশিক্ষিত টেকনিশিয়ান</li>
+                <li>✅ অরিজিনাল / জেনুইন পার্টস</li>
+                <li>✅ ৩০ দিনের সার্ভিস ওয়ারেন্টি</li>
+                <li>✅ স্বচ্ছ প্রাইসিং – কোনো লুকানো চার্জ নেই</li>
+                <li>✅ ডোরস্টেপ সার্ভিস উত্তর কলকাতা ও New Town এলাকায়</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <h2>আমাদের গ্রাহকরা কী বলেন</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <p>"AC-এর গ্যাস লিক হয়েছিল। ৪০ মিনিটের মধ্যে টেকনিশিয়ান এসে ঠিক করে দিলেন। খুবই সন্তুষ্ট!"</p>
+                    <strong>— রাহুল সাহা, Salt Lake</strong>
+                </div>
+                <div class="review-card">
+                    <p>"Fridge ঠান্ডা করছিল না। খুব ভালো সার্ভিস পেয়েছি। দামও যুক্তিসঙ্গত।"</p>
+                    <strong>— প্রিয়াঙ্কা দাস, New Town</strong>
+                </div>
+                <div class="review-card">
+                    <p>"Washing Machine-এর মোটর সমস্যা ছিল। একদিনের মধ্যে ঠিক হয়ে গেছে। ধন্যবাদ!"</p>
+                    <strong>— অমিতাভ রায়, Behala</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Review Link (নতুন সহজ লিঙ্ক) -->
+    <a href="https://g.page/r/YOUR-GOOGLE-LINK/review" target="_blank" class="google-review-link">
+        ⭐ আমাদের Google-এ Review দিন
+    </a>
+
+    <!-- Booking Form -->
+    <section id="booking" class="section">
+        <div class="container">
+            <h2>সার্ভিস বুক করুন</h2>
+            <form id="bookingForm" style="max-width: 650px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                <div style="margin-bottom:20px;"><input type="text" id="name" placeholder="আপনার নাম" required style="width:100%; padding:14px; border:1px solid #ccc; border-radius:8px;"></div>
+                <div style="margin-bottom:20px;"><input type="tel" id="phone" pattern="[0-9]{10}" placeholder="ফোন নাম্বার (10 ডিজিট)" required style="width:100%; padding:14px; border:1px solid #ccc; border-radius:8px;"></div>
+                <div style="margin-bottom:20px;"><input type="text" id="address" placeholder="পুরো ঠিকানা + পিনকোড" required style="width:100%; padding:14px; border:1px solid #ccc; border-radius:8px;"></div>
+                <div style="margin-bottom:20px;">
+                    <select id="appliance" required style="width:100%; padding:14px; border:1px solid #ccc; border-radius:8px;">
+                        <option value="">কোন অ্যাপ্লায়েন্স?</option>
+                        <option value="AC">AC</option>
+                        <option value="Fridge">Fridge</option>
+                        <option value="Washing Machine">Washing Machine</option>
+                        <option value="Microwave">Microwave</option>
+                        <option value="Geyser">Geyser</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:30px;"><textarea id="problem" rows="4" placeholder="সমস্যার বিস্তারিত বর্ণনা..." style="width:100%; padding:14px; border:1px solid #ccc; border-radius:8px;"></textarea></div>
+                <button type="submit" class="btn" style="background:#007bff; color:white; width:100%; padding:16px; font-size:1.3rem;">বুক করুন – আমরা শীঘ্রই যোগাযোগ করবো</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section id="faq" class="section" style="background:#f9f9f9;">
+        <div class="container">
+            <h2>প্রায়শ্চিত প্রশ্ন</h2>
+            <div class="faq-item">
+                <div class="faq-question">সার্ভিস চার্জ কত?</div>
+                <div class="faq-answer">সার্ভিস চার্জ ₹249 থেকে শুরু। পার্টস লাগলে আলাদা।</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">কতক্ষণের মধ্যে টেকনিশিয়ান আসবে?</div>
+                <div class="faq-answer">সাধারণত ৩০-৯০ মিনিটের মধ্যে।</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">ওয়ারেন্টি দেন কি?</div>
+                <div class="faq-answer">হ্যাঁ, ৩০ দিন সার্ভিস ওয়ারেন্টি + পার্টসের ওয়ারেন্টি।</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Repair Hub</strong></p>
+        <p>📍 Barasat, Madhyamgram, New Barrackpore, Sodpur, Chinar Park, Newtown এবং আশেপাশের এলাকা</p>
+        <p>📞 <a href="tel:9804567074" style="color:#ff3b30;">9804567074</a> | 💬 WhatsApp: 9804567074</p>
+        <p><a href="https://g.page/r/YOUR-GOOGLE-LINK/review" target="_blank" style="color:#ffd700; text-decoration:underline;">⭐ আমাদের Google-এ Review দিন</a></p>
+        <p>&copy; 2026 Repair Hub. সব অধিকার সংরক্ষিত।</p>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <div class="fixed-btn">
+        <a href="https://wa.me/919804567074?text=নমস্কার,%20আমি%20Repair%20Hub%20ওয়েবসাইট%20থেকে%20সার্ভিস%20চাই।" target="_blank" style="background:#25D366; color:white; width:65px; height:65px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; box-shadow:0 5px 20px rgba(0,0,0,0.3); margin-bottom:12px;">💬</a>
+        <a href="tel:9804567074" style="background:#ff3b30; color:white; width:65px; height:65px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:32px; box-shadow:0 5px 20px rgba(0,0,0,0.3);">📞</a>
     </div>
 
-    <div class="card" onclick="openForm('Microwave')">
-      <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png">
-      <p>Microwave</p>
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#services">🛠</a>
+        <a href="#areas">📍</a>
+        <a href="#booking">📅</a>
+        <a href="tel:9804567074">📞</a>
     </div>
 
-    <div class="card" onclick="openForm('Geyser')">
-      <img src="https://cdn-icons-png.flaticon.com/512/1685/1685099.png">
-      <p>Geyser</p>
-    </div>
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(q => {
+            q.addEventListener('click', () => {
+                const answer = q.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
 
-  </div>
-</div>
+        // Booking Form - WhatsApp (FINAL FIX)
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
 
-<!-- FORM -->
-<div class="modal" id="formBox">
-  <h3 id="serviceName"></h3>
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const appliance = document.getElementById('appliance').value;
+            const problem = document.getElementById('problem').value;
 
-  <input type="text" placeholder="Name">
-  <input type="text" placeholder="Phone">
-  <textarea placeholder="Problem"></textarea>
+            const message = `নমস্কার, আমার নাম ${name}. ফোন: ${phone}. ঠিকানা: ${address}. অ্যাপ্লায়েন্স: ${appliance}. সমস্যা: ${problem}`;
 
-  <button onclick="sendWhatsApp()">Book Now</button>
-</div>
+            const url = "https://wa.me/919804567074?text=" + encodeURIComponent(message);
 
-<a href="tel:9804567074" class="call">📞</a>
-<a href="#" class="whatsapp" onclick="sendWhatsApp()">💬</a>
+            window.open(url, '_blank');
 
-<div class="nav">
-  <div>🏠 Home</div>
-  <div>🛠 Services</div>
-  <div onclick="sendWhatsApp()">📞 Book</div>
-  <div>👤 Account</div>
-</div>
+            alert('ধন্যবাদ! WhatsApp-এ আপনার অনুরোধ পাঠানো হয়েছে। আমরা শীঘ্রই যোগাযোগ করবো।');
 
-<script>
-let service = "";
-
-function openForm(s){
-  service = s;
-  document.getElementById("formBox").style.display="block";
-  document.getElementById("serviceName").innerText = s;
-}
-
-function sendWhatsApp(){
-  let url = "https://wa.me/919804567074?text=Service:%20"+service;
-  window.open(url);
-}
-</script>
-
+            this.reset();
+        });
+    </script>
 </body>
-</html>                
+</html>
