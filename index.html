@@ -1,318 +1,212 @@
-
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repair Hub Appliance Services - Kolkata</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body { font-family: 'Segoe UI', sans-serif; }
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://source.unsplash.com/1600x900/?ac-repair') center/cover no-repeat;
-            height: 100vh;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
-        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; }
-        .tagline { font-size: 1.55rem; margin: 15px 0; }
-        .highlight { color: #ffd700; font-weight: bold; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Repair Hub</title>
 
-        .floating-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .float-btn {
-            width: 68px;
-            height: 68px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-            transition: all 0.3s;
-        }
-        .float-btn:hover { transform: scale(1.15); }
-        .float-call { background: #ff3b30; color: white; }
-        .float-whatsapp { background: #25D366; color: white; }
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f4f6f9;
+}
 
-        .service-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-        .testimonial { background: #f8f9fa; border-left: 6px solid #0d6efd; }
-    </style>
+/* HEADER */
+.header {
+  background: linear-gradient(135deg,#5f2eea,#7b61ff);
+  color: white;
+  padding: 20px;
+}
+
+.header h2 {
+  margin: 0;
+}
+
+.top-info {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* SEARCH */
+.search-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+}
+
+/* BANNER */
+.banner {
+  margin: 15px;
+  padding: 20px;
+  border-radius: 15px;
+  color: white;
+  background: linear-gradient(135deg,#ff7a18,#ffb347);
+}
+
+/* SERVICES */
+.section {
+  padding: 15px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+}
+
+.card {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 60px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  background: #5f2eea;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+/* FLOAT */
+.call {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: red;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+}
+
+.whatsapp {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: green;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+</style>
 </head>
+
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold fs-4" href="#">Repair Hub</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#home">হোম</a></li>
-                <li class="nav-item"><a class="nav-link" href="#services">সার্ভিস</a></li>
-                <li class="nav-item"><a class="nav-link" href="#reviews">রিভিউ</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div class="header">
+  <h2>Repair Hub Appliance Services</h2>
+  <div class="top-info">📞 9804567074 | Kolkata</div>
 
-<!-- Hero Section -->
-<section id="home" class="hero">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-7">
-                <h1>Repair Hub<br>Appliance Services</h1>
-                <p class="tagline">Professional AC, Refrigerator, Washing Machine & Microwave Repair in Kolkata</p>
-                <p class="fs-3 highlight">24/7 Emergency Service Available</p>
-                
-                <div class="d-flex gap-3 mt-4 flex-wrap">
-                    <span class="badge bg-success fs-5 px-4 py-3">Fast</span>
-                    <span class="badge bg-success fs-5 px-4 py-3">Reliable</span>
-                    <span class="badge bg-success fs-5 px-4 py-3">Affordable</span>
-                </div>
-            </div>
-            
-            <!-- Professional AC Technician Photo -->
-            <div class="col-lg-5 text-center">
-                <img src="https://source.unsplash.com/600x700/?indian-ac-technician-working-on-split-ac" 
-                     class="img-fluid rounded-4 shadow-lg" 
-                     alt="Professional AC Repair Technician"
-                     style="max-height: 520px; width: 100%; object-fit: cover; border: 5px solid white;">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Services -->
-<section id="services" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">আমরা যেসব অ্যাপ্লায়েন্স রিপেয়ার করি</h2>
-        <div class="row g-4">
-            <div class="col-md-6 col-lg-3">
-                <div class="card service-card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-snowflake fa-4x text-primary mb-3"></i>
-                        <h5>AC Repair & Service</h5>
-                        <p>Split, Window, Cassette AC – Gas Filling, Compressor, PCB</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card service-card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-box fa-4x text-info mb-3"></i>
-                        <h5>Fridge Repair</h5>
-                        <p>Single / Double Door – Gas Leak, Compressor, Cooling Issue</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card service-card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-tshirt fa-4x text-success mb-3"></i>
-                        <h5>Washing Machine Repair</h5>
-                        <p>Fully / Semi Automatic – Motor, Drum, Water Leak</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-                <div class="card service-card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-microwave fa-4x text-warning mb-3"></i>
-                        <h5>Microwave Repair</h5>
-                        <p>Magnetron, Door Switch, Heating Problem</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center mt-5 fs-5">
-            <p>১০ বছরের বেশি সময় ধরে কলকাতায় বিশ্বস্ত সার্ভিস দিয়ে আসছি। অরিজিনাল পার্টস, স্বচ্ছ মূল্য ও ৩০ দিনের ওয়ারেন্টি।</p>
-        </div>
-    </div>
-</section>
-
-<!-- Customer Reviews -->
-<section id="reviews" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">আমাদের গ্রাহকরা যা বলেন</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card testimonial h-100 p-4">
-                    <p>"AC একদম ঠান্ডা করছিল না। খুব দ্রুত এসে গ্যাস ফিল করে দিলেন। সার্ভিস অসাধারণ!"</p>
-                    <h6>— সৌরভ দাস, বেহালা</h6>
-                    <div class="text-warning">★★★★★</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card testimonial h-100 p-4">
-                    <p>"ফ্রিজের সমস্যা হয়েছিল। ১০ বছর ধরে এদের সার্ভিস নিচ্ছি। সবসময় সন্তুষ্ট।"</p>
-                    <h6>— অনিতা সেন, সল্টলেক</h6>
-                    <div class="text-warning">★★★★★</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card testimonial h-100 p-4">
-                    <p>"ওয়াশিং মেশিন বন্ধ হয়ে গিয়েছিল। রাতে ফোন করার পর সকালেই ঠিক করে দিয়েছেন।"</p>
-                    <h6>— রাজেশ মণ্ডল, হাওড়া</h6>
-                    <div class="text-warning">★★★★☆</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Footer -->
-<footer class="bg-dark text-white py-5 text-center">
-    <p class="fs-4">📞 <strong>9804567074</strong></p>
-    <p>কলকাতা ও আশেপাশে ২৪/৭ সার্ভিস | Genuine Parts | 30 Days Warranty</p>
-    <p>&copy; 2026 Repair Hub Appliance Services</p>
-</footer>
-
-<!-- Floating Buttons -->
-<div class="floating-btn">
-    <a href="tel:9804567074" class="float-btn float-call" title="Call Now"><i class="fas fa-phone"></i></a>
-    <a href="https://wa.me/919804567074" target="_blank" class="float-btn float-whatsapp" title="WhatsApp Now"><i class="fab fa-whatsapp"></i></a>
+  <div class="search-box">
+    <input type="text" placeholder="Search AC, Fridge...">
+  </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="banner">
+  ⚡ Service in 30 Minutes | Trusted Technician
+</div>
+
+<div class="section">
+  <h3>Services</h3>
+
+  <div class="grid">
+
+    <div class="card" onclick="openForm('AC Repair')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1048/1048314.png">
+      <p>AC Repair</p>
+    </div>
+
+    <div class="card" onclick="openForm('Fridge Repair')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1046/1046857.png">
+      <p>Fridge</p>
+    </div>
+
+    <div class="card" onclick="openForm('Washing Machine')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1685/1685173.png">
+      <p>Washing Machine</p>
+    </div>
+
+    <div class="card" onclick="openForm('Microwave')">
+      <img src="https://cdn-icons-png.flaticon.com/512/2921/2921822.png">
+      <p>Microwave</p>
+    </div>
+
+    <div class="card" onclick="openForm('Geyser')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1685/1685099.png">
+      <p>Geyser</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="modal" id="formBox">
+  <h3 id="serviceName"></h3>
+
+  <input type="text" placeholder="Name">
+  <input type="text" placeholder="Phone">
+  <textarea placeholder="Problem"></textarea>
+
+  <button onclick="sendWhatsApp()">Book Now</button>
+</div>
+
+<a href="tel:9804567074" class="call">📞</a>
+<a href="#" class="whatsapp" onclick="sendWhatsApp()">💬</a>
+
+<div class="nav">
+  <div>🏠 Home</div>
+  <div>🛠 Services</div>
+  <div onclick="sendWhatsApp()">📞 Book</div>
+  <div>👤 Account</div>
+</div>
+
+<script>
+let service = "";
+
+function openForm(s){
+  service = s;
+  document.getElementById("formBox").style.display="block";
+  document.getElementById("serviceName").innerText = s;
+}
+
+function sendWhatsApp(){
+  let url = "https://wa.me/919804567074?text=Service:%20"+service;
+  window.open(url);
+}
+</script>
+
 </body>
-</html>
-<!DOCTYPE html><html>
-<head>
-  <title>Repair Hub Appliance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>
-    body {font-family: Arial; margin:0; background:#f4f7fb;}
-    header {background:#0b63f6; color:white; padding:20px; text-align:center;}
-    .container {padding:20px;}
-    .card {background:white; padding:15px; margin:10px 0; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);} 
-    .btn {padding:12px 20px; border:none; border-radius:8px; cursor:pointer; margin-top:10px; background:#0b63f6; color:white; width:100%;}
-    input, textarea, select {width:100%; padding:10px; margin:6px 0; border-radius:6px; border:1px solid #ccc;}
-  </style></head><body><header>
-  <h1>Repair Hub Appliance Services</h1>
-  <p>AC & Fridge Repair Booking</p>
-</header><div class="container"><div class="card">
-  <h3>📝 Book Service Online</h3>  <input id="name" placeholder="Your Name">
-  <input id="phone" placeholder="Mobile Number">  <select id="machine">
-    <option value="">Select Machine</option>
-    <option>AC</option>
-    <option>Fridge</option>
-    <option>Washing Machine</option>
-  </select>  <textarea id="problem" placeholder="What problem are you facing?"></textarea>  <input id="date" type="date">
-  <input id="time" type="time">  <textarea id="address" placeholder="Your Address"></textarea><button class="btn" onclick="sendWhatsApp()">Submit Booking</button>
-
-</div></div><script>
-function sendWhatsApp() {
-  var name = document.getElementById('name').value;
-  var phone = document.getElementById('phone').value;
-  var machine = document.getElementById('machine').value;
-  var problem = document.getElementById('problem').value;
-  var date = document.getElementById('date').value;
-  var time = document.getElementById('time').value;
-  var address = document.getElementById('address').value;
-
-  if(!name || !phone || !machine || !problem){
-    alert("Please fill all required fields");
-    return;
-  }
-
-  var message = "*New Booking Request*%0A"
-    + "Name: " + name + "%0A"
-    + "Phone: " + phone + "%0A"
-    + "Machine: " + machine + "%0A"
-    + "Problem: " + problem + "%0A"
-    + "Date: " + date + "%0A"
-    + "Time: " + time + "%0A"
-    + "Address: " + address;
-
-  var url = "https://wa.me/919804567074?text=" + message;
-
-  window.open(url, '_blank');
-}
-</script></body>
-</html>
-<!DOCTYPE html><html>
-<head>
-  <title>Repair Hub Appliance Services</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <style>
-    body {font-family: Arial; margin:0; background:#f4f7fb;}
-    header {background:#0b63f6; color:white; padding:20px; text-align:center;}
-    .container {padding:20px;}
-    .card {background:white; padding:15px; margin:10px 0; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1);} 
-    .btn {padding:12px; border:none; border-radius:8px; cursor:pointer; background:#0b63f6; color:white; width:100%; margin-top:10px;}
-    input, textarea, select {width:100%; padding:10px; margin:6px 0; border-radius:6px; border:1px solid #ccc;}
-    .stars span {font-size:24px; cursor:pointer; color:gray;}
-    .review {background:#fff; padding:10px; border-radius:10px; margin-top:8px; box-shadow:0 2px 6px rgba(0,0,0,0.1);} 
-  </style></head><body><header>
-  <h1>Repair Hub Appliance Services</h1>
-  <p>Customer Review & Booking</p>
-</header><div class="container"><!-- Review Form --><div class="card">
-  <h3>⭐ Give Your Review</h3>
-  <input id="rname" placeholder="Your Name">
-  <textarea id="rtext" placeholder="Write your review"></textarea>  <div class="stars" id="stars">
-    <span onclick="rate(1)">★</span>
-    <span onclick="rate(2)">★</span>
-    <span onclick="rate(3)">★</span>
-    <span onclick="rate(4)">★</span>
-    <span onclick="rate(5)">★</span>
-  </div><button class="btn" onclick="submitReview()">Submit Review</button>
-
-</div><!-- Review Display --><div class="card">
-  <h3>⭐ Customer Reviews</h3>
-  <div id="reviewList"></div>
-</div></div><script>
-var rating = 0;
-
-function rate(star) {
-  rating = star;
-  let stars = document.querySelectorAll('#stars span');
-  stars.forEach((s, i) => {
-    s.style.color = i < star ? 'gold' : 'gray';
-  });
-}
-
-// Load saved reviews
-window.onload = function() {
-  let saved = localStorage.getItem('reviews');
-  if(saved){
-    document.getElementById('reviewList').innerHTML = saved;
-  }
-}
-
-function submitReview() {
-  var name = document.getElementById('rname').value;
-  var text = document.getElementById('rtext').value;
-
-  if(!name || !text || rating==0){
-    alert("Fill all fields & give rating");
-    return;
-  }
-
-  var reviewHTML = `<div class='review'><b>${name}</b><br>${'⭐'.repeat(rating)}<br>${text}</div>`;
-
-  let reviewList = document.getElementById('reviewList');
-  reviewList.innerHTML += reviewHTML;
-
-  // Save to localStorage
-  localStorage.setItem('reviews', reviewList.innerHTML);
-
-  // reset
-  document.getElementById('rname').value='';
-  document.getElementById('rtext').value='';
-  rate(0);
-}
-</script></body>
-</html>
+</html>                
